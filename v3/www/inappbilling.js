@@ -2,6 +2,10 @@
  * Copyright (C) 2012-2013 by Guillaume Charhon
  * Modifications 10/16/2013 by Brian Thurlow
  */
+
+(function() {
+"use strict";
+
 var log = function (msg) {
     console.log("InAppBilling[js]: " + msg);
 };
@@ -11,7 +15,8 @@ var InAppBilling = function () {
 };
 
 InAppBilling.prototype.init = function (success, fail, options, skus) {
-	options || (options = {});
+	if (!options)
+        options = {};
 
 	this.options = {
 		showLog: options.showLog !== false
@@ -105,4 +110,6 @@ InAppBilling.prototype.getProductDetails = function (success, fail, skus) {
     }
 };
 
-module.exports = new InAppBilling();
+window.inappbilling = store.android = new InAppBilling();
+
+}).call(this);
